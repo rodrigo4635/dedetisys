@@ -28,14 +28,13 @@ cd dedetisys && npm i
 npm start
 ```
 
-3. To deploy
+4. To deploy
 ```console
 npm run build
 ```
 
-## :memo: Notes <a name="authors"></a>
+## :memo: Authors <a name="authors"></a>
 
 - Rodrigo Pasini de Souza
 
 - Alisson
-
