@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Auth } from 'containers'
+import { useDispatch, useSelector } from 'react-redux'
+import { SplashScreen } from 'components/atoms'
+import Routes from '../Routes/Routes'
+import { loadUser } from './actions'
 
 const App = () => {
-    return (
-        <div>
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.app.user)
 
-        </div>
-    )
+    useEffect(() => {
+        dispatch(loadUser())
+        // eslint-disable-next-line
+    }, [])
+
+    if (user) {
+        return user.uid ? <Routes/> : <Auth/>
+    }
+    return <SplashScreen/> 
 }
 
 export default App

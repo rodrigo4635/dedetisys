@@ -3,7 +3,7 @@
 <p align="center">
  <a href="#about">About</a> •
  <a href="#installation">Install</a> • 
- <a href="#authors">Authors</a> • 
+ <a href="#authors">Authors</a>
 </p>
 
 ## :raised_hands: About <a name="about"></a>

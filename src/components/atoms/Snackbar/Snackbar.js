@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { SNACKBAR_CHANGE_VALUE } from 'constants/actionTypes'
-import MuiSnackbar from '@mui/material/Snackbar'
-import MuiAlert from '@mui/material/Alert'
+import MuiSnackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert'
 
 const Snackbar = () =>  {
     const { visible, message, variant } = useSelector(state => state.snackbar)

@@ -1,0 +1,27 @@
+import React, { useState } from 'react'
+import Paper from '@material-ui/core/Paper'
+import { SignIn, SignUp, ForgotPassword } from './tabs'
+import useStyles from './useStyles'
+import { Tabs } from 'components/molecules'
+
+const AuthContainer = () => {
+    const [tab, setTab] = useState(0)
+    const classes = useStyles()
+
+    return (
+        <div className={ classes.root }>
+            <Paper className={ classes.paper } elevation={ 0 }>
+                <img className={ classes.logo } alt='Logo'/>
+                <div style={{ position: 'relative', height: '100%' }}>
+                    <Tabs value={ tab } onChange={ val => setTab(val) } items={ ['Login', 'Cadastro'] }/>
+                    <div className={ classes.tabsArea }>
+                        { tab === 0 ? <SignIn/> : <SignUp/> }
+                    </div>
+                    <ForgotPassword/>
+                </div>
+            </Paper>
+        </div>
+    )
+}
+
+export default AuthContainer
