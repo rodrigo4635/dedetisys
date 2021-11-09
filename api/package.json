@@ -1,0 +1,21 @@
+{
+    "name": "node-api-alunos",
+    "version": "0.0.1",
+    "description": "",
+    "main": "app.js",
+    "dependencies": {
+        "express": "^4.17.1",
+        "mysql2": "^2.3.0",
+        "sequelize": "^6.6.5"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.13",
+        "sequelize-cli": "^6.2.0"
+    },
+    "scripts": {
+        "start": "nodemon app.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
