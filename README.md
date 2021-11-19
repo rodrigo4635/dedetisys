@@ -2,8 +2,7 @@
 
 <p align="center">
  <a href="#about">About</a> •
- <a href="#installation">Install</a> • 
- <a href="#authors">Authors</a>
+ <a href="#installation">Install</a>
 </p>
 
 ## :raised_hands: About <a name="about"></a>
@@ -32,9 +31,3 @@ npm start
 ```console
 npm run build
 ```
-
-## :memo: Authors <a name="authors"></a>
-
-- Rodrigo Pasini de Souza
-
-- Alisson

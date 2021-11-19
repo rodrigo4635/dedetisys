@@ -7,8 +7,8 @@ const INITIAL_STATE = {
     password: '',
     confirmPassword: '',
     passwordError: '',
-    fullname: '',
-    fullnameError: ''
+    name: '',
+    nameError: ''
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -26,7 +26,7 @@ const reducer = (state = INITIAL_STATE, action) => {
                 passwordError: action.error
             }
         case SIGN_UP_CLEAN:
-            return { ...state, ...INITIAL_STATE, ...(action.payload || {}) }
+            return INITIAL_STATE
         default: 
             return state
     }

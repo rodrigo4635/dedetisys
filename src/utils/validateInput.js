@@ -48,9 +48,9 @@ function phone(value, acceptEmpty) {
  * @param { boolean } acceptEmpty - If the input can be empty (Default to `false`)
  * @returns { string } Returns a error message, if exists
 */
-function fullname(value, acceptEmpty) {
+function name(value, acceptEmpty) {
     if (acceptEmpty && value === '') return ''
-    if (value.trim().length < LENGTH.fullname.min) return 'O nome é muito curto'
+    if (value.trim().length < LENGTH.name.min) return 'O nome é muito curto'
     return ''
 }
 
@@ -82,7 +82,7 @@ function password(value) {
  * @param { string } identity - CPF or CNPJ
  * @returns { boolean } Returns true if the values are correct
 */
-function sign(dispatch, isLogin, email, password, fullname, confirmPass) {
+function sign(dispatch, isLogin, email, password, name, confirmPass) {
     let isValid = true
     if (email.replace(/ /g, '') === '') {
         isValid = false
@@ -93,9 +93,9 @@ function sign(dispatch, isLogin, email, password, fullname, confirmPass) {
         dispatch ({ type: isLogin ? SIGN_IN_CHANGE_VALUE : SIGN_UP_CHANGE_VALUE, property: 'password', payload: password, error: 'Preencha a senha' })
     }
     if (!isLogin) {
-        if (fullname.replace(/ /g, '') === '') {
+        if (name.replace(/ /g, '') === '') {
             isValid = false
-            dispatch ({ type: SIGN_UP_CHANGE_VALUE, payload: fullname, error: 'Preencha o nome', property: 'fullname' })
+            dispatch ({ type: SIGN_UP_CHANGE_VALUE, payload: name, error: 'Preencha o nome', property: 'name' })
         }
         if (password !== confirmPass) {
             isValid = false
@@ -110,7 +110,7 @@ const validateInput = {
     email,
     password,
     sign,
-    fullname
+    name
 }
 
 export default validateInput

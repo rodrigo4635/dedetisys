@@ -1,4 +1,4 @@
-import { SIGN_IN_CHANGE_VALUE } from 'constants/actionTypes'
+import { APP_CHANGE_VALUE, SIGN_IN_CHANGE_VALUE, SIGN_IN_CLEAN } from 'constants/actionTypes'
 import { validateInput } from 'utils'
 
 /**
@@ -32,10 +32,17 @@ import { validateInput } from 'utils'
     return dispatch => {
         const isValid = validateInput.sign(dispatch, true, email, password)
         
-        if (!Boolean(emailError) && !Boolean(passwordError) && isValid) {
-            //dispatch({ type: SIGN_IN_CHANGE_VALUE, payload: true, property: 'loading' })
-
-            //Make login
+        if (Boolean(emailError) || Boolean(passwordError) || !isValid) {
+            return
         }
+        dispatch({ type: SIGN_IN_CHANGE_VALUE, property: 'loading', payload: true })
+
+        setTimeout(() => {
+            dispatch({ type: SIGN_IN_CLEAN })
+            dispatch({ type: APP_CHANGE_VALUE, property: 'user', payload: { 
+                uid: 'userID',
+                name: 'João da silva'
+            }})
+        }, 1000)
     }
 }

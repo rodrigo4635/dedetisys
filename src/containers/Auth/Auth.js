@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper'
 import { SignIn, SignUp, ForgotPassword } from './tabs'
 import useStyles from './useStyles'
 import { Tabs } from 'components/molecules'
+import Typography from '@material-ui/core/Typography'
 
 const AuthContainer = () => {
     const [tab, setTab] = useState(0)
@@ -11,7 +12,7 @@ const AuthContainer = () => {
     return (
         <div className={ classes.root }>
             <Paper className={ classes.paper } elevation={ 0 }>
-                <img className={ classes.logo } alt='Logo'/>
+                <Typography align='center' variant='h5' className={ classes.logo }>Logo</Typography>
                 <div style={{ position: 'relative', height: '100%' }}>
                     <Tabs value={ tab } onChange={ val => setTab(val) } items={ ['Login', 'Cadastro'] }/>
                     <div className={ classes.tabsArea }>

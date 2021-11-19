@@ -1,4 +1,4 @@
-import { SIGN_UP_CHANGE_VALUE, SIGN_UP_CHANGE_CONFIRM_PASS } from 'constants/actionTypes'
+import { SIGN_UP_CHANGE_VALUE, SIGN_UP_CHANGE_CONFIRM_PASS, SIGN_UP_CLEAN, APP_CHANGE_VALUE } from 'constants/actionTypes'
 import { validateInput } from 'utils'
 
 /**
@@ -13,7 +13,7 @@ import { validateInput } from 'utils'
  */
  export function changeValue(id, value, password) {
     switch(id) {
-        case 'fullname': return { type: SIGN_UP_CHANGE_VALUE, property: id, payload: value, error: validateInput.fullname(value) }
+        case 'name': return { type: SIGN_UP_CHANGE_VALUE, property: id, payload: value, error: validateInput.name(value) }
         case 'email': return { type: SIGN_UP_CHANGE_VALUE, property: id, payload: value, error: validateInput.email(value) }
         case 'password': return { type: SIGN_UP_CHANGE_VALUE, property: id, payload: value, error: validateInput.password(value) }
         case 'confirmPassword': return { type: SIGN_UP_CHANGE_CONFIRM_PASS, payload: value, error: password !== value ? 'As senhas não coincidem' : '' }
@@ -29,14 +29,22 @@ import { validateInput } from 'utils'
  * 
  * @param { object } data - Sign up reducer data
  */
-export function signUp(fullname, fullnameError, email, emailError, password, confirmPassword, passwordError) {
+export function signUp(name, nameError, email, emailError, password, confirmPassword, passwordError) {
     return dispatch => {
-        const isValid = validateInput.sign(dispatch, false, email, password, fullname, confirmPassword)
+        const isValid = validateInput.sign(dispatch, false, email, password, name, confirmPassword)
 
-        if (!Boolean(fullnameError + emailError + passwordError) && isValid) {
-            /*dispatch({ type: SIGN_UP_CHANGE_VALUE, payload: true, id: 'loading' })
-            Create user and sign 
-            */
+        if (Boolean(nameError + emailError + passwordError) || !isValid) {
+            return
         }
+
+        dispatch({ type: SIGN_UP_CHANGE_VALUE, payload: true, property: 'loading' })
+
+        setTimeout(() => {
+            dispatch({ type: SIGN_UP_CLEAN })
+            dispatch({ type: APP_CHANGE_VALUE, property: 'user', payload: { 
+                uid: 'userID',
+                name: 'João da silva'
+            }})
+        }, 1000)
     }
 }

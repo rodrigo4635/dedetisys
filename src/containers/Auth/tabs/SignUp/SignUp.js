@@ -10,22 +10,23 @@ import useStyles from './useStyles'
 const SignUpTab = () => {
     const classes = useStyles()
     const dispatch = useDispatch()
-    const { loading, fullname, fullnameError, email, emailError, password, confirmPassword, passwordError } = useSelector(state => state.auth.signUp)
+    const { loading, name, nameError, email, emailError, password, confirmPassword, passwordError } = useSelector(state => state.auth.signUp)
+    const btnDisabled = loading || !name || nameError || !email || emailError || !password || passwordError
 
     const handleChangeInput = id => event => {
         dispatch(changeValue(id, event.target.value, password))
     }
     
     const handleSignUp = () => {
-        dispatch(signUp())
+        dispatch(signUp(name, nameError, email, emailError, password, confirmPassword, passwordError))
     }
 
     return (
         <div className={ classes.background }>
             <Grid container spacing={ 2 }>
                 <Grid item xs={ 12 }>
-                    <TextField { ...DEF_PROPS.fullname } value={ fullname } onChange={ handleChangeInput('fullname') } helperText={ fullnameError }
-                        error={ Boolean(fullnameError) } disabled={ loading } autoFocus
+                    <TextField { ...DEF_PROPS.name } value={ name } onChange={ handleChangeInput('name') } helperText={ nameError }
+                        error={ Boolean(nameError) } disabled={ loading } autoFocus
                     />
                 </Grid>
                 <Grid item xs={ 12 }>
@@ -44,7 +45,7 @@ const SignUpTab = () => {
                     />
                 </Grid>
             </Grid>
-            <Button disabled={ loading } fullWidth variant="contained" size='large' color="primary" onClick={ handleSignUp }
+            <Button disabled={ btnDisabled } fullWidth variant="contained" size='large' color="primary" onClick={ handleSignUp }
                 disableElevation className={ classes.button }
             >
                 { loading ? 'Carregando' : 'Cadastrar' }

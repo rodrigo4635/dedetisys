@@ -1,8 +1,8 @@
 const colors = {
-    primary: '#700B97',
-    secondary: '#3E065F',
+    primary: '#49479d',
+    secondary: '#49479d',
     background: '#000',
-    paper: '#121212',
+    paper: '#212121',
     paperLight: '#1c1c1c',
     textPrimary: '#fff',
     textSecondary: '#b5b5b5',

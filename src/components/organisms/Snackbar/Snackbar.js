@@ -9,7 +9,7 @@ const Snackbar = () =>  {
     const dispatch = useDispatch()
 
     const handleClose = () => {
-        dispatch({ type: SNACKBAR_CHANGE_VALUE, id: 'visible', payload: false })
+        dispatch({ type: SNACKBAR_CHANGE_VALUE, property: 'visible', payload: false })
     }
 
     return (

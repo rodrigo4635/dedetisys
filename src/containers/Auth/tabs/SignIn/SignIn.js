@@ -11,6 +11,7 @@ const SignInTab = () => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const { email, emailError, loading, password, passwordError } = useSelector(state => state.auth.signIn)
+    const btnDisabled = loading || !email || emailError || !password || passwordError
 
     const handleKeyPress = event => {
         if (event.key === 'Enter') {
@@ -38,7 +39,7 @@ const SignInTab = () => {
             <TextField { ...DEF_PROPS.password } margin='normal' value={ password } onChange={ handleChangeValue('password') }
                 onKeyPress={ handleKeyPress } helperText={ passwordError } error={ Boolean(passwordError) } disabled={ loading }
             />
-            <Button disabled={ loading || Boolean(emailError + passwordError) } fullWidth variant="contained" size='large' color="primary"
+            <Button disabled={ btnDisabled } fullWidth variant="contained" size='large' color="primary"
                 onClick={ handleSignIn } disableElevation className={ classes.button }
             >
                 { loading ? 'Carregando' : 'Entrar' }

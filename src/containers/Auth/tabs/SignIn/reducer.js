@@ -8,7 +8,7 @@ const INITIAL_STATE = {
     loading: false,
 }
 
-export default function reducer(state = INITIAL_STATE, action) {
+const reducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case SIGN_IN_CHANGE_VALUE:
             return {
@@ -17,8 +17,10 @@ export default function reducer(state = INITIAL_STATE, action) {
                 [`${ action.property }Error`]: action.error
             }
         case SIGN_IN_CLEAN:
-            return { ...state, ...INITIAL_STATE }
+            return INITIAL_STATE
         default: 
             return state
     }
 }
+
+export default reducer

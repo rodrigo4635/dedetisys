@@ -1,4 +1,4 @@
-import { FORGOT_PASSWORD_CHANGE_VALUE } from 'constants/actionTypes'
+import { FORGOT_PASSWORD_CHANGE_VALUE, FORGOT_PASSWORD_CLEAN, SNACKBAR_SHOW } from 'constants/actionTypes'
 import { LENGTH, REGEX } from 'constants/inputs'
 
 /**
@@ -30,17 +30,10 @@ import { LENGTH, REGEX } from 'constants/inputs'
             dispatch({ type: FORGOT_PASSWORD_CHANGE_VALUE, property: 'email', payload: email, error: 'Não esqueça de preencher o e-mail' })
             return
         }
-
-        /*
         dispatch({ type: FORGOT_PASSWORD_CHANGE_VALUE, property: 'loading', payload: true })
-
-        .then(() => {
+        setTimeout(() => {
             dispatch({ type: SNACKBAR_SHOW, message: 'Mensagem enviada, verifique seu e-mail e a caixa de spam!' })
             dispatch({ type: FORGOT_PASSWORD_CLEAN })
-        })
-        .catch(error => {
-            dispatch({ type: FORGOT_PASSWORD_CHANGE_VALUE, property: 'loading', payload: false })
-            dispatch({ type: SNACKBAR_SHOW, message: `Não foi possível enviar o e-mail: ${ error.message }`, variant: 'error' })
-        })*/
+        }, 1000)
     }
 }

@@ -10,7 +10,7 @@ export default makeStyles(theme => ({
     },
     paper: {
         overflow: 'hidden',
-        height: '70vh',
+        minHeight: '70vh',
         display: 'flex',
         flexDirection: 'column',
         width: '35%',
@@ -23,9 +23,7 @@ export default makeStyles(theme => ({
         padding: theme.spacing(3.5),
     },
     logo: {
-        width: theme.spacing(10),
-        marginBottom: 20,
-        height: 'auto'
+        marginBottom: 20
     },
     tabsArea: {
         height: '100%',
