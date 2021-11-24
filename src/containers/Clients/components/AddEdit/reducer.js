@@ -2,6 +2,7 @@ import { CLIENTS_ADD_EDIT_CHANGE_VALUE, CLIENTS_ADD_EDIT_SET } from 'constants/a
 
 const INITIAL_STATE = {
     visible: false,
+    editable: true,
     creating: true,
     error: [],
     name: '',

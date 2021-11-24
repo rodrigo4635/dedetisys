@@ -20,6 +20,12 @@ export function loadData() {
     }
 }
 
-export function openDetails(data) {
-    return { type: CLIENTS_ADD_EDIT_SET, payload: { ...data, creating: false } }
+export function openDetails(data, editable) {
+    return { type: CLIENTS_ADD_EDIT_SET, payload: { ...data, visible: true, creating: false, editable } }
+}
+
+export function deleteClient(data, clients) {
+    return dispatch => {
+
+    }
 }

@@ -13,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 
 const AddEdit = () => {
     const state = useSelector(state => state.clients.addEdit)
-    const { visible, error, creating } = state
+    const { visible, error, creating, editable } = state
     const dispatch = useDispatch()
 
     const handleClose = () => {
@@ -32,7 +32,7 @@ const AddEdit = () => {
                 { INPUTS.map(input => (
                     <Grid item xs={ 12 } md={ input.size } key={ input.id }>
                         <TextField { ...input.props } error={ error.includes(input.id) } helperText={ error.includes(input.id) ? 'Verifique o campo' : '' }
-                            onChange={ handleChangeInput(input.id) } value={ state[input.id] }
+                            onChange={ handleChangeInput(input.id) } value={ state[input.id] } disabled={ !editable }
                         >
                             { input.elements ?
                                 input.elements.map((option) => (
