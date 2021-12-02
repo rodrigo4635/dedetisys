@@ -1,8 +1,8 @@
 import { DEF_PROPS } from "./inputs"
 
 export const ACCOUNT_TYPES = {
-    pf: { id: 'pf', label: 'Pessoa fisica', value: 0 },
-    pj: { id: 'pj', label: 'Pessoa jurídica', value: 1 }
+    pf: { id: 'pf', label: 'Pessoa fisica', value: '0' },
+    pj: { id: 'pj', label: 'Pessoa jurídica', value: '1' }
 }
 
 export const INPUTS = [

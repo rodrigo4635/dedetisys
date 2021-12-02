@@ -9,11 +9,13 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
-import { deleteClient, openDetails } from '../../actions'
+import { deleteClient } from '../../actions'
+import { openDetails } from '../AddEdit/actions'
 import useStyles from './useStyles'
 import EditRoundedIcon from '@material-ui/icons/EditRounded'
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded'
 import { IconButton } from '@material-ui/core'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const StyledTableRow = withStyles(() => ({
     root: {
@@ -37,10 +39,11 @@ const StyledTableCell = withStyles((theme) => ({
 const List = () => {
     const classes = useStyles()
     const clients = useSelector(state => state.clients.main.data)
+    const loading = useSelector(state => state.clients.main.loading)
     const dispatch = useDispatch()
 
-    const handleClickItem = data => {
-        dispatch(openDetails(data, false))
+    const handleClickItem = client => {
+        if (!loading.includes(client.id)) dispatch(openDetails(client, false))
     }
 
     const handleEdit = data => event => {
@@ -50,7 +53,9 @@ const List = () => {
 
     }
 
-    const handleDelete = data => () => {
+    const handleDelete = data => event => {
+        event.preventDefault()
+        event.stopPropagation()
         dispatch(deleteClient(data, clients))
     }
 
@@ -67,19 +72,28 @@ const List = () => {
                         <StyledTableCell>Cidade</StyledTableCell>
                         <StyledTableCell padding='checkbox'>Editar</StyledTableCell>
                         <StyledTableCell padding='checkbox'>Excluir</StyledTableCell>
-
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     { clients.map(client => (
-                        <StyledTableRow hover key={ client.id } onClick={ () => handleClickItem(client) } className={ classes.tableRow }>
+                        <StyledTableRow hover={ !loading.includes(client.id) } key={ client.id } onClick={ () => handleClickItem(client) }
+                            style={{ cursor: loading.includes(client.id) ? 'default' : 'pointer' }}
+                        >
                             <StyledTableCell component="th" scope="row">{ client.name }</StyledTableCell>
                             <StyledTableCell>{ client.taxvat }</StyledTableCell>
                             <StyledTableCell>{ client.email }</StyledTableCell>
                             <StyledTableCell>{ client.tel_1 }</StyledTableCell>
                             <StyledTableCell>{ client.city }</StyledTableCell>
-                            <TableCell padding='checkbox'><IconButton onClick={ handleEdit(client) }><EditRoundedIcon/></IconButton></TableCell>
-                            <TableCell padding='checkbox'><IconButton onClick={ handleDelete(client) }><DeleteRoundedIcon/></IconButton></TableCell>
+                            <TableCell padding='checkbox'>
+                                <IconButton disabled={ loading.includes(client.id)} onClick={ handleEdit(client) } >
+                                    <EditRoundedIcon/>
+                                </IconButton>
+                            </TableCell>
+                            <TableCell padding='checkbox'>
+                                <IconButton disabled={ loading.includes(client.id)} onClick={ handleDelete(client) }>
+                                    { loading.includes(client.id) ? <CircularProgress size={ 20 }/> : <DeleteRoundedIcon/> }
+                                </IconButton>
+                            </TableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>

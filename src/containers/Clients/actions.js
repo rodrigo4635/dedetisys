@@ -1,4 +1,4 @@
-import { CLIENTS_CHANGE_VALUE, CLIENTS_ADD_EDIT_SET } from "constants/actionTypes"
+import { CLIENTS_CHANGE_VALUE, CLIENTS_ADD_EDIT_SET, CLIENTS_CHANGE_LOADING } from "constants/actionTypes"
 
 const EXAMPLE_DATA = [
     { id: 'el1', name: 'Rodrigo', type: 0, taxvat: '00000000000', email: 'rodrigo@mail.com', tel_1: '48999999999', address: 'Rua teste', number: 1, complement: 'Casa', district: 'centro', city: 'Turvo', state: 'SC', latitude: -29.123, longitude: -48.1923 },
@@ -12,20 +12,24 @@ const EXAMPLE_DATA = [
     { id: 'el9', name: 'Jonas', type: 0, taxvat: '00000000000', email: 'Jonas@mail.com', tel_1: '48999999999', address: 'Rua teste de novo', number: 1, complement: 'Casa', district: 'centro', city: 'Turvo', state: 'SC', latitude: -29.123, longitude: -48.1923 },
 ]
 
+export function changeValue(id, value) {
+    return { type: CLIENTS_CHANGE_VALUE, property: id, payload: value }
+}
+
 export function loadData() {
     return dispatch => {
         setTimeout(() => {
-            dispatch({ type: CLIENTS_CHANGE_VALUE, property: 'data', payload: EXAMPLE_DATA })
+            dispatch(changeValue('data', EXAMPLE_DATA))
         }, 2000)
     }
 }
 
-export function openDetails(data, editable) {
-    return { type: CLIENTS_ADD_EDIT_SET, payload: { ...data, visible: true, creating: false, editable } }
-}
-
-export function deleteClient(data, clients) {
+export function deleteClient(client, clients) {
     return dispatch => {
-
+        dispatch({ type: CLIENTS_CHANGE_LOADING, add: true, payload: client.id })
+        setTimeout(() => {
+            dispatch(changeValue('data', clients.filter(el => el.id !== client.id)))
+            dispatch({ type: CLIENTS_CHANGE_LOADING, payload: client.id })
+        }, 2000)
     }
 }
