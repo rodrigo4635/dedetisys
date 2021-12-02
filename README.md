@@ -6,7 +6,7 @@
 </p>
 
 ## :raised_hands: About <a name="about"></a>
-Lorem ipsum
+Application to manage customers and services
 
 
 ## :wrench:	Installation <a name="installation"></a>
@@ -16,13 +16,13 @@ Lorem ipsum
 git clone https://github.com/rodrigo4635/dedetisys.git
 ```
 
-2. Open the folder and run
+2. Open the web folder and run
 
 ```console
-cd dedetisys && npm i
+cd dedetisys/web && npm i
 ```
 
-3. To start the project
+3. To start the web project
 ```console
 npm start
 ```
