@@ -12,7 +12,9 @@ app.get("/", function(req, res) {
 });
 
 const clientesRoute = require("./routes/clientes");
+const servicosRoute = require("./routes/servicos");
 clientesRoute(app);
+servicosRoute(app);
 
 app.listen(port, function() {
     console.log(`Server running at http://localhost:${port}/`);
