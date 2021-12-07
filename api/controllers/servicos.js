@@ -11,7 +11,7 @@ exports.listAll = async(req, res) => {
 
 exports.listWeek = (req, res) => {
     sequelize.query(
-            "SELECT * FROM `servicos` WHERE yearweek(`date`) = yearweek(curdate()) or yearweek(`expirationDate`) = yearweek(curdate()) ORDER BY date", { type: sequelize.QueryTypes.SELECT })
+            "SELECT * FROM `Servicos` WHERE yearweek(`date`) = yearweek(curdate()) or yearweek(`expirationDate`) = yearweek(curdate()) ORDER BY date", { type: sequelize.QueryTypes.SELECT })
         .then(servicos => {
             res.json(servicos);
         });
