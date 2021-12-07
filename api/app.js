@@ -13,8 +13,10 @@ app.get("/", function(req, res) {
 
 const clientesRoute = require("./routes/clientes");
 const servicosRoute = require("./routes/servicos");
+const usuariosRoute = require("./routes/usuarios");
 clientesRoute(app);
 servicosRoute(app);
+usuariosRoute(app);
 
 app.listen(port, function() {
     console.log(`Server running at http://localhost:${port}/`);
