@@ -16,18 +16,13 @@ Application to manage customers and services
 git clone https://github.com/rodrigo4635/dedetisys.git
 ```
 
-2. Open the web folder and run
+2. Open the folder and run
 
 ```console
-cd dedetisys/web && npm i
+npm i
 ```
 
-3. To start the web project
+3. To start the project
 ```console
 npm start
-```
-
-4. To deploy
-```console
-npm run build
 ```
