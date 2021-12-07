@@ -21,13 +21,13 @@ exports.dashboard = (req, res) => {
     sequelize.query(
             "SELECT \
             (SELECT ifnull(SUM(price),0)  \
-            FROM `servicos` \
+            FROM `Servicos` \
             WHERE month(`date`) = month(curdate()) and year(`date`) = year(curdate())) AS valoresMes, \
             (SELECT count(id) \
-            FROM `servicos` \
+            FROM `Servicos` \
             WHERE done = 0 and yearweek(`date`) = yearweek(curdate())) AS fazerSemana, \
             (SELECT count(id) \
-            FROM `servicos` \
+            FROM `Servicos` \
             WHERE done = 1 and yearweek(`date`) = yearweek(curdate())) AS feitosSemana ", { type: sequelize.QueryTypes.SELECT })
         .then(dashboard => {
             res.json(dashboard[0]);
