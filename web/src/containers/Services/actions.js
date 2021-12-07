@@ -1,17 +1,17 @@
-import { CLIENTS_CHANGE_VALUE, CLIENTS_CHANGE_LOADING, SNACKBAR_SHOW } from "constants/actionTypes"
+import { SERVICES_CHANGE_VALUE, SERVICES_CHANGE_LOADING, SNACKBAR_SHOW } from "constants/actionTypes"
 import { API_URL, SNACKBAR_VARIANTS } from "constants/general"
 import { getReducer } from "utils"
 
 export function changeValue(id, value) {
-    return { type: CLIENTS_CHANGE_VALUE, property: id, payload: value }
+    return { type: SERVICES_CHANGE_VALUE, property: id, payload: value }
 }
 
 export function loadData() {
     return dispatch => {
         const userToken = getReducer('app', 'user', 'token')
-        console.log('Load clients')
+        console.log('Load services')
 
-        fetch(`${ API_URL }/clientes`, {
+        fetch(`${ API_URL }/servicos`, {
             method: 'GET',
             headers: {
                 "Authorization": `Bearer ${ userToken }`
@@ -19,25 +19,25 @@ export function loadData() {
         })
         .then(res => res.json())
         .then(json => {
-            console.log('Load clients response: ', json)
+            console.log('Load services response: ', json)
             dispatch(changeValue('data', json))
         })
         .catch(error => {
-            console.error('Error on load clients: ', error)
+            console.error('Error on load services: ', error)
             dispatch(changeValue('data', []))
-            dispatch({ type: SNACKBAR_SHOW, message: 'Ocorreu um erro ao carregar os clientes', variant: SNACKBAR_VARIANTS.error })
+            dispatch({ type: SNACKBAR_SHOW, message: 'Ocorreu um erro ao carregar os serviços', variant: SNACKBAR_VARIANTS.error })
         })
     }
 }
 
-export function deleteClient(clientId, clients) {
+export function deleteService(serviceId, services) {
     return dispatch => {
-        console.log('Client id to delete: ', clientId)
+        console.log('Service id to delete: ', serviceId)
 
-        dispatch({ type: CLIENTS_CHANGE_LOADING, add: true, payload: clientId })
+        dispatch({ type: SERVICES_CHANGE_LOADING, add: true, payload: serviceId })
         const userToken = getReducer('app', 'user', 'token')
 
-        fetch(`${ API_URL }/clientes/${ clientId }`, {
+        fetch(`${ API_URL }/servicos/${ serviceId }`, {
             method: 'DELETE',
             headers: {
                 "Authorization": `Bearer ${ userToken }`
@@ -45,19 +45,19 @@ export function deleteClient(clientId, clients) {
         })
         .then(res => res.json())
         .then(json => {
-            console.log('Delete client response: ', json)
-            dispatch({ type: CLIENTS_CHANGE_LOADING, payload: clientId })
+            console.log('Delete service response: ', json)
+            dispatch({ type: SERVICES_CHANGE_LOADING, payload: serviceId })
 
             if (json.success) {
-                dispatch(changeValue('data', clients.filter(el => el.id !== clientId)))
+                dispatch(changeValue('data', services.filter(el => el.id !== serviceId)))
             } else {
                 throw new Error('')
             }
         })
         .catch(error => {
             console.error('Client delete error: ', error)
-            dispatch({ type: CLIENTS_CHANGE_LOADING, payload: clientId })
-            dispatch({ type: SNACKBAR_SHOW, message: 'Ocorreu um erro ao excluir o cliente', variant: SNACKBAR_VARIANTS.error })
+            dispatch({ type: SERVICES_CHANGE_LOADING, payload: serviceId })
+            dispatch({ type: SNACKBAR_SHOW, message: 'Ocorreu um erro ao excluir o serviço', variant: SNACKBAR_VARIANTS.error })
         })
     }
 }

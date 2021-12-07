@@ -1,4 +1,5 @@
-import { SIGN_UP_CHANGE_VALUE, SIGN_UP_CHANGE_CONFIRM_PASS, SIGN_UP_CLEAN, APP_CHANGE_VALUE } from 'constants/actionTypes'
+import { SIGN_UP_CHANGE_VALUE, SIGN_UP_CHANGE_CONFIRM_PASS, SNACKBAR_SHOW } from 'constants/actionTypes'
+import { API_URL, SNACKBAR_VARIANTS } from 'constants/general'
 import { validateInput } from 'utils'
 
 /**
@@ -29,7 +30,7 @@ import { validateInput } from 'utils'
  * 
  * @param { object } data - Sign up reducer data
  */
-export function signUp(name, nameError, email, emailError, password, confirmPassword, passwordError) {
+export function signUp(name, nameError, email, emailError, password, confirmPassword, passwordError, type) {
     return dispatch => {
         const isValid = validateInput.sign(dispatch, false, email, password, name, confirmPassword)
 
@@ -39,12 +40,23 @@ export function signUp(name, nameError, email, emailError, password, confirmPass
 
         dispatch({ type: SIGN_UP_CHANGE_VALUE, payload: true, property: 'loading' })
 
-        setTimeout(() => {
-            dispatch({ type: SIGN_UP_CLEAN })
-            dispatch({ type: APP_CHANGE_VALUE, property: 'user', payload: { 
-                uid: 'userID',
-                name: 'João da silva'
-            }})
-        }, 1000)
+        fetch(`${ API_URL }/usuarios`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password, name, type })
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json)
+            dispatch({ type: SIGN_UP_CHANGE_VALUE, payload: false, property: 'loading' })
+            dispatch({ type: SNACKBAR_SHOW, message: 'Usuário cadastrado com sucesso' })
+        })
+        .catch(error => {
+            console.error(error)
+            dispatch({ type: SIGN_UP_CHANGE_VALUE, payload: false, property: 'loading' })
+            dispatch({ type: SNACKBAR_SHOW, message: 'Ocorreu um erro ao se cadastrar', variant: SNACKBAR_VARIANTS.error })
+        })
     }
 }

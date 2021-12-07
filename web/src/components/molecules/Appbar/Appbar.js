@@ -29,7 +29,7 @@ const Appbar = () => {
                     </Link>
                     <div className={ classes.buttons }>
                         { ROUTES.map(route => (
-                            <Link to={ route.path } className={ classes.link }>
+                            <Link key={ route.path } to={ route.path } className={ classes.link }>
                                 <Button>{ route.name }</Button>
                             </Link>
                         ))}

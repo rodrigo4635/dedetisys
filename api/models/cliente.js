@@ -46,13 +46,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         state: {
             type: DataTypes.STRING(2),
-        },
-        latitude: {
-            type: DataTypes.GEOMETRY('POINT'),
-        },
-        longitude: {
-            type: DataTypes.GEOMETRY('POINT'),
-        },
+        }
     }, {
         sequelize,
         modelName: "Cliente",

@@ -10,7 +10,9 @@ export const LENGTH = {
     city: { min: 2, max: 40 },
     state: { min: 2, max: 2 },
     tel: { min: 10, max: 14 },
-    number: { min: 1, max: 6 }
+    number: { min: 1, max: 6 },
+    description: { min: 2, max: 60 },
+    price: { min: 1, max: 12 }
 }
 
 /**Regix to some inputs */
@@ -48,6 +50,20 @@ export const DEF_PROPS = {
         variant: "outlined",
         label: "Nome completo",
         inputProps: { maxLength: LENGTH.name.max, type: 'text' }
+    },
+    description: { 
+        required: true,
+        fullWidth: true,
+        variant: "outlined",
+        label: "Descrição",
+        inputProps: { maxLength: LENGTH.description.max, type: 'text' }
+    },
+    price: { 
+        required: true,
+        fullWidth: true,
+        variant: "outlined",
+        label: "Preço",
+        inputProps: { maxLength: LENGTH.price.max, type: 'text' }
     },
     email: {
         autoCapitalize: 'none',

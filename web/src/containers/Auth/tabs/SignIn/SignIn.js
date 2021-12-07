@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import { changeInput, signIn } from './actions'
 import { useSelector, useDispatch } from 'react-redux' 
-import { FORGOT_PASSWORD_CHANGE_VALUE } from 'constants/actionTypes'
 import { DEF_PROPS } from 'constants/inputs'
 import useStyles from './useStyles'
 
@@ -11,7 +10,7 @@ const SignInTab = () => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const { email, emailError, loading, password, passwordError } = useSelector(state => state.auth.signIn)
-    const btnDisabled = loading || !email || emailError || !password || passwordError
+    const btnDisabled = Boolean(loading || !email || emailError || !password || passwordError)
 
     const handleKeyPress = event => {
         if (event.key === 'Enter') {
@@ -27,10 +26,6 @@ const SignInTab = () => {
         dispatch(signIn(email, emailError, password, passwordError))
     }
 
-    const handleForgotPass = () => {
-        dispatch({ type: FORGOT_PASSWORD_CHANGE_VALUE, payload: true, property: 'visible' })
-    }
-
     return (
         <div>
             <TextField { ...DEF_PROPS.email } margin='normal' value={ email } onChange={ handleChangeValue('email') } error={ Boolean(emailError) }
@@ -43,9 +38,6 @@ const SignInTab = () => {
                 onClick={ handleSignIn } disableElevation className={ classes.button }
             >
                 { loading ? 'Carregando' : 'Entrar' }
-            </Button>
-            <Button size='small' onClick={ handleForgotPass } color='primary'>
-                Esqueceu a senha?
             </Button>
         </div>
     )

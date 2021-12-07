@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
-import { deleteClient } from '../../actions'
+import { deleteService } from '../../actions'
 import { openDetails } from '../AddEdit/actions'
 import EditRoundedIcon from '@material-ui/icons/EditRounded'
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded'
@@ -36,12 +36,12 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell)
 
 const List = () => {
-    const clients = useSelector(state => state.clients.main.data)
-    const loading = useSelector(state => state.clients.main.loading)
+    const services = useSelector(state => state.services.main.data)
+    const loading = useSelector(state => state.services.main.loading)
     const dispatch = useDispatch()
 
-    const handleClickItem = client => {
-        if (!loading.includes(client.id)) dispatch(openDetails(client, false))
+    const handleClickItem = service => {
+        if (!loading.includes(service.id)) dispatch(openDetails(service, false))
     }
 
     const handleEdit = data => event => {
@@ -54,44 +54,46 @@ const List = () => {
     const handleDelete = data => event => {
         event.preventDefault()
         event.stopPropagation()
-        dispatch(deleteClient(data.id, clients))
+        dispatch(deleteService(data.id, services))
     }
 
-    if (!clients) return <Loading label='Carregando clientes' />
+    if (!services) return <Loading label='Carregando serviços' />
     return (
         <TableContainer component={ Paper }>
             <Table>
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>ID</StyledTableCell>
+                        <StyledTableCell>Descrição</StyledTableCell>
                         <StyledTableCell>Nome</StyledTableCell>
-                        <StyledTableCell>Identidade</StyledTableCell>
-                        <StyledTableCell>E-mail</StyledTableCell>
-                        <StyledTableCell>Telefone</StyledTableCell>
-                        <StyledTableCell>Cidade</StyledTableCell>
+                        <StyledTableCell>Preço</StyledTableCell>
+                        <StyledTableCell>Pago</StyledTableCell>
+                        <StyledTableCell>Duração</StyledTableCell>
+                        <StyledTableCell>Pago</StyledTableCell>
                         <StyledTableCell padding='checkbox'>Editar</StyledTableCell>
                         <StyledTableCell padding='checkbox'>Excluir</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    { clients.map(client => (
-                        <StyledTableRow hover={ !loading.includes(client.id) } key={ client.id } onClick={ () => handleClickItem(client) }
-                            style={{ cursor: loading.includes(client.id) ? 'default' : 'pointer' }}
+                    { services.map(service => (
+                        <StyledTableRow hover={ !loading.includes(service.id) } key={ service.id } onClick={ () => handleClickItem(service) }
+                            style={{ cursor: loading.includes(service.id) ? 'default' : 'pointer' }}
                         >
-                            <StyledTableCell>{ client.id }</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">{ client.name }</StyledTableCell>
-                            <StyledTableCell>{ client.taxvat }</StyledTableCell>
-                            <StyledTableCell>{ client.email }</StyledTableCell>
-                            <StyledTableCell>{ client.tel_1 }</StyledTableCell>
-                            <StyledTableCell>{ client.city }</StyledTableCell>
+                            <StyledTableCell>{ service.id }</StyledTableCell>
+                            <StyledTableCell component="th" scope="row">{ service.description }</StyledTableCell>
+                            <StyledTableCell>{ service.contactName }</StyledTableCell>
+                            <StyledTableCell>{ service.price }</StyledTableCell>
+                            <StyledTableCell>{ service.amountPaid }</StyledTableCell>
+                            <StyledTableCell>{ service.duration }</StyledTableCell>
+                            <StyledTableCell>{ service.done ? 'Sim' : 'Não' }</StyledTableCell>
                             <TableCell padding='checkbox'>
-                                <IconButton disabled={ loading.includes(client.id)} onClick={ handleEdit(client) } >
+                                <IconButton disabled={ loading.includes(service.id)} onClick={ handleEdit(service) } >
                                     <EditRoundedIcon/>
                                 </IconButton>
                             </TableCell>
                             <TableCell padding='checkbox'>
-                                <IconButton disabled={ loading.includes(client.id)} onClick={ handleDelete(client) }>
-                                    { loading.includes(client.id) ? <CircularProgress size={ 20 }/> : <DeleteRoundedIcon/> }
+                                <IconButton disabled={ loading.includes(service.id)} onClick={ handleDelete(service) }>
+                                    { loading.includes(service.id) ? <CircularProgress size={ 20 }/> : <DeleteRoundedIcon/> }
                                 </IconButton>
                             </TableCell>
                         </StyledTableRow>

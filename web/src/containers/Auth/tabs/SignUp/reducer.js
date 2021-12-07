@@ -2,13 +2,14 @@ import { SIGN_UP_CHANGE_VALUE, SIGN_UP_CHANGE_CONFIRM_PASS, SIGN_UP_CLEAN } from
 
 const INITIAL_STATE = {
     loading: false,
-    email: '',
+    email: 'teste@mail.com',
     emailError: '',
-    password: '',
-    confirmPassword: '',
+    password: 'teste12',
+    confirmPassword: 'teste12',
     passwordError: '',
-    name: '',
-    nameError: ''
+    name: 'Teste',
+    nameError: '',
+    type: 'admin'
 }
 
 const reducer = (state = INITIAL_STATE, action) => {

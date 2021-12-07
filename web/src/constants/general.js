@@ -1,5 +1,7 @@
 import * as Containers from 'containers'
 
+export const API_URL = 'http://localhost:5000'
+
 export const SNACKBAR_VARIANTS = {
     success: 'success',
     warning: 'warning',

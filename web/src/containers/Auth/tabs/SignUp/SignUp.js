@@ -10,15 +10,15 @@ import useStyles from './useStyles'
 const SignUpTab = () => {
     const classes = useStyles()
     const dispatch = useDispatch()
-    const { loading, name, nameError, email, emailError, password, confirmPassword, passwordError } = useSelector(state => state.auth.signUp)
-    const btnDisabled = loading || !name || nameError || !email || emailError || !password || passwordError
+    const { loading, name, nameError, email, emailError, password, confirmPassword, passwordError, type } = useSelector(state => state.auth.signUp)
+    const btnDisabled = Boolean(loading || !name || nameError || !email || emailError || !password || passwordError)
 
     const handleChangeInput = id => event => {
         dispatch(changeValue(id, event.target.value, password))
     }
     
     const handleSignUp = () => {
-        dispatch(signUp(name, nameError, email, emailError, password, confirmPassword, passwordError))
+        dispatch(signUp(name, nameError, email, emailError, password, confirmPassword, passwordError, type))
     }
 
     return (

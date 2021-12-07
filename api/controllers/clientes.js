@@ -26,6 +26,7 @@ exports.findOne = async(req, res) => {
 };
 
 exports.create = async(req, res) => {
+    console.log(req.body)
     const novoCliente = await Cliente.create(req.body);
     res.json(novoCliente);
 };

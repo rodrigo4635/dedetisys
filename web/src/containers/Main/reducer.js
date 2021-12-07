@@ -1,13 +1,16 @@
-import { APP_CHANGE_VALUE } from 'constants/actionTypes'
+import { MAIN_CHANGE_VALUE } from 'constants/actionTypes'
 
 const INITIAL_STATE = {
-    user: {} // if it is null, the system is loading, if it is an empty object, the user is not logged in
+    recents: null,
+    weekDo: -1,
+    weekDone: -1,
+    monthlyAmount: -1 
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
-        case APP_CHANGE_VALUE:
-            return { 
+        case MAIN_CHANGE_VALUE:
+            return {
                 ...state,
                 [action.property]: action.payload
             }

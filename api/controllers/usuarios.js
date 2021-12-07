@@ -5,6 +5,7 @@ const { Usuario } = require("../models");
 
 exports.login = async(req, res) => {
     const { email, password } = req.body;
+
     const usuario = await Usuario.findOne({
         attributes: ["id", "name", "email", "type"],
         where: {

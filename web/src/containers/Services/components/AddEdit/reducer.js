@@ -1,4 +1,4 @@
-import { CLIENTS_ADD_EDIT_CHANGE_VALUE, CLIENTS_ADD_EDIT_SET, CLIENTS_ADD_EDIT_CHANGE_ERROR, CLIENTS_ADD_EDIT_CHANGE_CHILD_VALUE, CLIENTS_ADD_EDIT_CLEAN } from 'constants/actionTypes'
+import { SERVICES_ADD_EDIT_CHANGE_VALUE, SERVICES_ADD_EDIT_SET, SERVICES_ADD_EDIT_CHANGE_ERROR, SERVICES_ADD_EDIT_CHANGE_CHILD_VALUE, SERVICES_ADD_EDIT_CLEAN } from 'constants/actionTypes'
 
 const INITIAL_STATE = {
     visible: false, // If dialog is visible
@@ -8,31 +8,26 @@ const INITIAL_STATE = {
     error: [],
     inputs: {
         id: '',
-        name: '',
-        type: '0',
-        taxvat: '',
-        email: '',
-        tel_1: '',
-        tel_2: '',
-        address: '',
-        number: '',
-        complement: '',
-        district: '',
-        city: '',
-        state: '',
-        latitude: -28.928563,
-        longitude: -49.675969
+        description: '',
+        contactName: '',
+        price: '',
+        amountPaid: '',
+        duration: '',
+        done: '0',
+        observations: '',
+        date: '',
+        expirationDate: ''
     }
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
-        case CLIENTS_ADD_EDIT_CHANGE_VALUE:
+        case SERVICES_ADD_EDIT_CHANGE_VALUE:
             return {
                 ...state,
                 [action.property]: action.payload
             }
-        case CLIENTS_ADD_EDIT_CHANGE_CHILD_VALUE:
+        case SERVICES_ADD_EDIT_CHANGE_CHILD_VALUE:
             return {
                 ...state,
                 [action.parent]: {
@@ -40,17 +35,17 @@ const reducer = (state = INITIAL_STATE, action) => {
                     [action.property]: action.payload
                 }
             }
-        case CLIENTS_ADD_EDIT_CHANGE_ERROR:
+        case SERVICES_ADD_EDIT_CHANGE_ERROR:
             return {
                 ...state,
                 error: action.add ? [action.payload, ...state.error] : state.error.filter(el => el !== action.payload)
             }
-        case CLIENTS_ADD_EDIT_SET:
+        case SERVICES_ADD_EDIT_SET:
             return {
                 ...state,
                 ...action.payload
             }
-        case CLIENTS_ADD_EDIT_CLEAN:
+        case SERVICES_ADD_EDIT_CLEAN:
             return INITIAL_STATE
         default: 
             return state

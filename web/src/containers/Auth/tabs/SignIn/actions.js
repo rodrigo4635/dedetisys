@@ -1,4 +1,5 @@
-import { APP_CHANGE_VALUE, SIGN_IN_CHANGE_VALUE, SIGN_IN_CLEAN } from 'constants/actionTypes'
+import { APP_CHANGE_VALUE, SIGN_IN_CHANGE_VALUE, SNACKBAR_SHOW } from 'constants/actionTypes'
+import { API_URL, SNACKBAR_VARIANTS } from 'constants/general'
 import { validateInput } from 'utils'
 
 /**
@@ -35,14 +36,30 @@ import { validateInput } from 'utils'
         if (Boolean(emailError) || Boolean(passwordError) || !isValid) {
             return
         }
+
         dispatch({ type: SIGN_IN_CHANGE_VALUE, property: 'loading', payload: true })
 
-        setTimeout(() => {
-            dispatch({ type: SIGN_IN_CLEAN })
-            dispatch({ type: APP_CHANGE_VALUE, property: 'user', payload: { 
-                uid: 'userID',
-                name: 'João da silva'
-            }})
-        }, 1000)
+        fetch(`${ API_URL }/login`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password })
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json)
+            dispatch({ type: SIGN_IN_CHANGE_VALUE, property: 'loading', payload: false })
+
+            if (json.success) {
+                dispatch({ type: APP_CHANGE_VALUE, property: 'user', payload: { ...json.usuario, token: json.token } })
+                localStorage.setItem('@dedetisys/auth', JSON.stringify(json))
+            } else throw new Error(json.error)
+        })
+        .catch(error => {
+            console.error(error)
+            dispatch({ type: SIGN_IN_CHANGE_VALUE, property: 'loading', payload: false })
+            dispatch({ type: SNACKBAR_SHOW, message: 'Ocorreu um erro ao fazer login: ' + error, variant: SNACKBAR_VARIANTS.error })
+        })
     }
 }

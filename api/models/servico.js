@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         duration: {
-            type: DataTypes.FLOAT(4, 2),
+            type: DataTypes.FLOAT(8, 2),
             allowNull: true
         },
         duration: {

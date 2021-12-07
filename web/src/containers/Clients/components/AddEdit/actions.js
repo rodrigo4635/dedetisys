@@ -1,7 +1,8 @@
 import { CLIENTS_ADD_EDIT_CHANGE_ERROR, CLIENTS_ADD_EDIT_CHANGE_VALUE, CLIENTS_CHANGE_VALUE, CLIENTS_ADD_EDIT_CHANGE_CHILD_VALUE, CLIENTS_ADD_EDIT_SET, CLIENTS_ADD_EDIT_CLEAN, SNACKBAR_SHOW } from "constants/actionTypes"
 import { INPUTS } from "constants/clients"
+import { API_URL, SNACKBAR_VARIANTS } from "constants/general"
 import { LENGTH } from "constants/inputs"
-import dayjs from "dayjs"
+import { getReducer } from "utils"
 
 export function openDetails(client, editable) {
     return { type: CLIENTS_ADD_EDIT_SET, payload: { visible: true, creating: false, editable, inputs: client, loading: false, error: [] } }
@@ -29,22 +30,42 @@ export function changeInput(id, event) {
 
 export function saveClient(state, clients) {
     return dispatch => {
-        const valid = validateInputs(state.inputs, dispatch)
-
+        const { creating, inputs } = state
+        const valid = validateInputs(inputs, dispatch)
+        
         if (valid) {
             dispatch(changeValue('loading', true))
+            
+            const userToken = getReducer('app', 'user', 'token')
+            const urlFetch = `${ API_URL }/clientes${ creating ? '' : `/${ inputs.id }` }` 
+            
+            const setData = {
+                ...JSON.parse(JSON.stringify(inputs)),
+                type: parseInt(inputs.type, 10),
+                number: parseInt(inputs.number, 10),
+                id: undefined
+            }
 
-            setTimeout(() => {
-                const setData = {
-                    ...state.inputs,
-                    type: parseInt(state.inputs.type, 10),
-                    id: state.creating ? dayjs().unix() : state.inputs.id
-                }
-
-                dispatch({ type: CLIENTS_CHANGE_VALUE, property: 'data', payload: state.creating ? [...clients, setData] : clients.map(el => el.id === state.inputs.id ? setData : el) })
+            fetch(urlFetch, {
+                method: creating ? 'POST' : 'PUT',
+                headers: {
+                    "Authorization": `Bearer ${ userToken }`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(setData)
+            })
+            .then(res => res.json())
+            .then(json => {
+                const update = creating ? [...clients, json] : clients.map(el => el.id === inputs.id ? { ...el, ...setData, id: el.id } : el)
+                dispatch({ type: CLIENTS_CHANGE_VALUE, property: 'data', payload: update })
                 dispatch({ type: CLIENTS_ADD_EDIT_CLEAN })
                 dispatch({ type: SNACKBAR_SHOW, message: 'Cadastro salvo' })
-            }, 2000)
+            })
+            .catch(error => {
+                console.error(error)
+                dispatch(changeValue('loading', false))
+                dispatch({ type: SNACKBAR_SHOW, message: 'Ocorreu um erro ao salvar o cliente', variant: SNACKBAR_VARIANTS.error })
+            })
         }
     }
 }

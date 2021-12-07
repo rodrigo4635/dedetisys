@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Paper from '@material-ui/core/Paper'
-import { SignIn, SignUp, ForgotPassword } from './tabs'
+import { SignIn, SignUp } from './tabs'
 import useStyles from './useStyles'
 import { Tabs } from 'components/molecules'
 import Typography from '@material-ui/core/Typography'
@@ -18,7 +18,6 @@ const AuthContainer = () => {
                     <div className={ classes.tabsArea }>
                         { tab === 0 ? <SignIn/> : <SignUp/> }
                     </div>
-                    <ForgotPassword/>
                 </div>
             </Paper>
         </div>

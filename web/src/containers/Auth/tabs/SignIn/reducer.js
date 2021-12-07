@@ -1,9 +1,9 @@
 import { SIGN_IN_CHANGE_VALUE, SIGN_IN_CLEAN } from 'constants/actionTypes'
 
 const INITIAL_STATE = {
-    email: '',
+    email: 'allisongluiz@outlook.com',
     emailError: '',
-    password: '',
+    password: '654321',
     passwordError: '',
     loading: false,
 }
