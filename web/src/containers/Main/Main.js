@@ -18,19 +18,19 @@ const Main = () => {
     return (
         <div className={ classes.background }>
             <Grid container spacing={ 2 } className={ classes.grid }>
-                <Grid item xs={ 4 }>
+                <Grid item md={ 4 } xs={ 12 }>
                     <Paper variant="outlined" className={ classes.paper }>
                         <Typography style={{ opacity: .7 }}>Valores do mês</Typography>
-                        <Typography variant='h5'>{ monthlyAmount >= 0 ? monthlyAmount : 'Carregando' }</Typography>
+                        <Typography variant='h5'>R$ { monthlyAmount >= 0 ? monthlyAmount : 'Carregando' }</Typography>
                     </Paper>
                 </Grid>
-                <Grid item xs={ 4 }>
+                <Grid item md={ 4 } xs={ 12 }>
                     <Paper variant="outlined" className={ classes.paper }>
-                        <Typography style={{ opacity: .7 }}>A fazer</Typography>
+                        <Typography style={{ opacity: .7 }}>A fazer na semana</Typography>
                         <Typography variant='h5'>{ weekDo >= 0 ? weekDo : 'Carregando' }</Typography>
                     </Paper>
                 </Grid>   
-                <Grid item xs={ 4 }>
+                <Grid item md={ 4 } xs={ 12 }>
                     <Paper variant="outlined" className={ classes.paper }>
                         <Typography style={{ opacity: .7 }}>Feitos na semana</Typography>
                         <Typography variant='h5'>{ weekDone >= 0 ? weekDone : 'Carregando' }</Typography>

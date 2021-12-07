@@ -69,7 +69,7 @@ const List = () => {
                         <StyledTableCell>Preço</StyledTableCell>
                         <StyledTableCell>Pago</StyledTableCell>
                         <StyledTableCell>Duração</StyledTableCell>
-                        <StyledTableCell>Pago</StyledTableCell>
+                        <StyledTableCell>Finalizado</StyledTableCell>
                         <StyledTableCell padding='checkbox'>Editar</StyledTableCell>
                         <StyledTableCell padding='checkbox'>Excluir</StyledTableCell>
                     </TableRow>

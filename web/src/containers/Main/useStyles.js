@@ -4,10 +4,9 @@ const useStyles = makeStyles(theme => ({
     background: {
         width: '100%',
         minHeight: '80vh',
-        padding: theme.spacing(10, 10)
+        padding: theme.spacing(15, 10, 10)
     },
     grid: {
-        marginTop: 30,
         marginBottom: 30
     },
     paper: {

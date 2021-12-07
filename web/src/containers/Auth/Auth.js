@@ -12,7 +12,7 @@ const AuthContainer = () => {
     return (
         <div className={ classes.root }>
             <Paper className={ classes.paper } elevation={ 0 }>
-                <Typography align='center' variant='h5' className={ classes.logo }>Logo</Typography>
+                <Typography align='center' variant='h4' className={ classes.logo }>Dedetisys</Typography>
                 <div style={{ position: 'relative', height: '100%' }}>
                     <Tabs value={ tab } onChange={ val => setTab(val) } items={ ['Login', 'Cadastro'] }/>
                     <div className={ classes.tabsArea }>

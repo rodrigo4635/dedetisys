@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     },
     logo: {
         marginRight: 50,
-        color: '#fff',
+        color: "#fff",
         fontWeight: 'bold'
     },
     buttons: {

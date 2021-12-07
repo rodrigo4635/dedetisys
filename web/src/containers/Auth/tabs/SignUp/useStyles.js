@@ -5,7 +5,7 @@ export default makeStyles(() => ({
         paddingTop: 16
     },
     button: {
-        marginTop: 12,
+        marginTop: 30,
         marginBottom: 12
     }
 }))

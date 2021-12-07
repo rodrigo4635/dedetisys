@@ -24,7 +24,7 @@ const Appbar = () => {
                 <Toolbar>
                     <Link to='/' className={ classes.link }>
                         <Typography variant="h5" className={ classes.logo }>
-                            Logo
+                            Dedetisys
                         </Typography>
                     </Link>
                     <div className={ classes.buttons }>

@@ -22,7 +22,7 @@ export const ROUTES = [
     },
     {
         path: '/servicos',
-        name: 'Servicos',
+        name: 'Serviços',
         comp: () => <Containers.Services/>
     }
 ]

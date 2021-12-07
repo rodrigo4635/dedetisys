@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
+import { Typography } from '@material-ui/core'
 
 const StyledTableRow = withStyles(() => ({
     root: {
@@ -34,34 +35,37 @@ const List = () => {
 
     if (!services) return <Loading label='Carregando serviços' />
     return (
-        <TableContainer component={ Paper }>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell>ID</StyledTableCell>
-                        <StyledTableCell>Descrição</StyledTableCell>
-                        <StyledTableCell>Nome</StyledTableCell>
-                        <StyledTableCell>Preço</StyledTableCell>
-                        <StyledTableCell>Pago</StyledTableCell>
-                        <StyledTableCell>Duração</StyledTableCell>
-                        <StyledTableCell>Pago</StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    { services.map(service => (
-                        <StyledTableRow hover key={ service.id }>
-                            <StyledTableCell>{ service.id }</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">{ service.description }</StyledTableCell>
-                            <StyledTableCell>{ service.contactName }</StyledTableCell>
-                            <StyledTableCell>{ service.price }</StyledTableCell>
-                            <StyledTableCell>{ service.amountPaid }</StyledTableCell>
-                            <StyledTableCell>{ service.duration }</StyledTableCell>
-                            <StyledTableCell>{ service.done ? 'Sim' : 'Não' }</StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <div>
+            <Typography gutterBottom variant='h6'>Serviços recentes</Typography>
+            <TableContainer component={ Paper }>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>ID</StyledTableCell>
+                            <StyledTableCell>Descrição</StyledTableCell>
+                            <StyledTableCell>Nome</StyledTableCell>
+                            <StyledTableCell>Preço</StyledTableCell>
+                            <StyledTableCell>Pago</StyledTableCell>
+                            <StyledTableCell>Duração</StyledTableCell>
+                            <StyledTableCell>Finalizado</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        { services.map(service => (
+                            <StyledTableRow hover key={ service.id }>
+                                <StyledTableCell>{ service.id }</StyledTableCell>
+                                <StyledTableCell component="th" scope="row">{ service.description }</StyledTableCell>
+                                <StyledTableCell>{ service.contactName }</StyledTableCell>
+                                <StyledTableCell>{ service.price }</StyledTableCell>
+                                <StyledTableCell>{ service.amountPaid }</StyledTableCell>
+                                <StyledTableCell>{ service.duration }</StyledTableCell>
+                                <StyledTableCell>{ service.done ? 'Sim' : 'Não' }</StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </div>
     )
 }
 
