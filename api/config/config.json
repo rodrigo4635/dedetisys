@@ -1,23 +1,23 @@
 {
     "development": {
-        "username": "root",
-        "password": "root",
-        "database": "dedetisys",
-        "host": "127.0.0.1",
+        "username": "VaCB5iTOTx",
+        "password": "WzvEzLoyp5",
+        "database": "VaCB5iTOTx",
+        "host": "remotemysql.com",
         "dialect": "mysql"
     },
     "test": {
-        "username": "root",
-        "password": "root",
-        "database": "dedetisys",
-        "host": "127.0.0.1",
+        "username": "VaCB5iTOTx",
+        "password": "WzvEzLoyp5",
+        "database": "VaCB5iTOTx",
+        "host": "remotemysql.com",
         "dialect": "mysql"
     },
     "production": {
-        "username": "root",
-        "password": "root",
-        "database": "dedetisys",
-        "host": "127.0.0.1",
+        "username": "VaCB5iTOTx",
+        "password": "WzvEzLoyp5",
+        "database": "VaCB5iTOTx",
+        "host": "remotemysql.com",
         "dialect": "mysql"
     }
 }
